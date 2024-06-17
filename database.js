@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
 
-const MONGO_URL = 'mongodb+srv://acalvoatienza:XEfSY-7e5uq38Ch@sneakers.pzv3v6x.mongodb.net/';
-const MONGO_DB_NAME = 'backendDB';
+dotenv.config();
+
+const { MONGO_URL, MONGO_DB_NAME, } = process.env;
 
 try {
   await mongoose.connect(MONGO_URL, { dbName: MONGO_DB_NAME, autoIndex: true, });
