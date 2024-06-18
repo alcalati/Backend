@@ -6,7 +6,12 @@ async function getAll() {
   return allClothes;
 }
 
+function getByFilter({ query, }) {
+  const filteredClothes = clothesRepository.getByFilter({ query, });
+  return filteredClothes;
+}
 
 export {
-  getAll
+  getAll,
+  getByFilter
 };
