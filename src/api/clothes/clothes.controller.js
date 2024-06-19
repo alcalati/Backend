@@ -5,6 +5,13 @@ async function getAll(req, res) {
   res.json(allClothes);
 }
 
+async function getByFilter(req, res) {
+  const { query, } = req;
+  const filteredClothes = await clothesService.getByFilter({query,});
+  res.json(filteredClothes);
+}
+
 export {
-  getAll
+  getAll,
+  getByFilter
 };
