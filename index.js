@@ -2,9 +2,12 @@ import express from 'express';
 
 import './database.js';
 
+import authMiddleware from './src/middlewares/auth.middleware.js';
+
 const server = express();
 
 server.use(express.json());
+server.use(authMiddleware);
 
 const { PORT, } = process.env;
 const port = PORT || 3000;
