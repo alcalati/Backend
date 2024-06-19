@@ -10,7 +10,13 @@ async function getAll() {
   return allClothes;
 }
 
+function remove({ id, }) {
+  const replacedClothes = clothesModel.findByIdAndDelete(id);
+  return replacedClothes;
+}
+
 export {
   getAll,
-  getByFilter
+  getByFilter,
+  remove
 };

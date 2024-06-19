@@ -10,7 +10,13 @@ async function getAll() {
   return allClothes;
 }
 
+function remove({ id, }) {
+  const removedItem = clothesRepository.remove({ id, });
+  return removedItem;
+}
+
 export {
   getAll,
-  getByFilter
+  getByFilter,
+  remove
 };

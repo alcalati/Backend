@@ -11,7 +11,14 @@ async function getByFilter(req, res) {
   res.json(filteredClothes);
 }
 
+async function remove(req, res) {
+  const { id, } = req.params;
+  const removedItem = await clothesService.remove({ id, });
+  res.json(removedItem);
+}
+
 export {
   getAll,
-  getByFilter
+  getByFilter,
+  remove
 };
