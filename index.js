@@ -1,5 +1,5 @@
 import express from 'express';
-
+import apiRouter from './src/api/router.js';
 import './database.js';
 import apiRouter from './src/api/router.js';
 
