@@ -8,7 +8,6 @@ function unauthorized({ res, }) {
 
 function authMiddleware(req, res, next) {
   const publicRoutes = [
-    // '/auth/register',
   ];
 
   if (publicRoutes.some((publicRoute) => req.url.includes(publicRoute))) {
