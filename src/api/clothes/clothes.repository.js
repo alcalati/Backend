@@ -5,7 +5,6 @@ async function getAll() {
   return allClothes;
 }
 
-
 export {
   getAll
 };
