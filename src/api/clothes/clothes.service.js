@@ -14,7 +14,7 @@ async function getAll() {
 async function remove({ id, }) {
 
   const refundedItem = await clothesRepository.getById({id,});
-  salesRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
+  await salesRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
   const removedItem = clothesRepository.remove({ id, });
   return removedItem;
 }
