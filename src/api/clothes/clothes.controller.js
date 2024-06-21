@@ -23,8 +23,15 @@ async function getByPriceRange(req, res) {
   res.json(filteredClothesByPriceRange);
 }
 
+async function remove(req, res) {
+  const { id, } = req.params;
+  const removedItem = await clothesService.remove({ id, });
+  res.json(removedItem);
+}
+
 export {
   getAll,
   getByFilter,
-  getByPriceRange
+  getByPriceRange,
+  remove
 };
