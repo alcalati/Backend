@@ -1,4 +1,5 @@
 import * as clothesRepository from './clothes.repository.js';
+import * as salesRepository from '../sales/sales.repository.js';
 
 function getByFilter({ query, }) {
   const filteredClothes = clothesRepository.getByFilter({ query, });
@@ -10,7 +11,10 @@ async function getAll() {
   return allClothes;
 }
 
-function remove({ id, }) {
+async function remove({ id, }) {
+
+  const refundedItem = await clothesRepository.getById({id,});
+  salesRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
   const removedItem = clothesRepository.remove({ id, });
   return removedItem;
 }
