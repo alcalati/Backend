@@ -11,8 +11,12 @@ async function getAll() {
   return allClothes;
 }
 
-async function remove({ id, }) {
+function getByPriceRange({ query, }) {
+  const filteredClothesByPriceRange = clothesRepository.getByPriceRange({ query, });
+  return filteredClothesByPriceRange;
+}
 
+async function remove({ id, }) {
   const refundedItem = await clothesRepository.getById({id,});
   await salesRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
   const removedItem = clothesRepository.remove({ id, });
@@ -22,5 +26,6 @@ async function remove({ id, }) {
 export {
   getAll,
   getByFilter,
+  getByPriceRange,
   remove
 };
