@@ -10,7 +10,14 @@ async function getAll() {
   return allClothes;
 }
 
+
+async function updateById(id, updateData) {
+  const updatedProduct = await clothesRepository.updateById(id, updateData);
+  return updatedProduct;
+}
+
 export {
-  getAll,
-  getByFilter
+  updateById,
+  getByFilter,
+  getAll
 };
