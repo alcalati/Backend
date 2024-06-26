@@ -13,13 +13,8 @@ function getToken({ email, }) {
   return token;
 }
 
-async function register({ newUser, }) {
-  const { email, password, } = newUser;
+async function login({ email, password, }) {
   const dbUser = await usersRepository.getByEmail({ email, });
-  if (dbUser) {
-    throw new Error('This email already exists');
-async function login({ email, password }) {
-  const dbUser = await usersRepository.getByEmail({ email });
   if (!dbUser) {
     throw new Error('Wrong credentials');
   }
@@ -29,13 +24,21 @@ async function login({ email, password }) {
     throw new Error('Wrong credentials');
   }
 
-  return getToken({ email });
+  return getToken({ email, });
 }
+
+async function register({ newUser, }) {
+  const { email, password, } = newUser;
+  const dbUser = await usersRepository.getByEmail({ email, });
+  if (dbUser) {
+    throw new Error('This email already exists');
+  }
+
   const hashedPassword = hashSync(password, 10);
   newUser.password = hashedPassword;
-
   usersRepository.create({ user: newUser, });
   return getToken({ email, });
 }
+
 
 export { login, register };
