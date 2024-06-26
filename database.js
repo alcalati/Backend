@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+// eslint-disable-next-line no-undef
 const { MONGO_URL, MONGO_DB_NAME, } = process.env;
 
 try {
