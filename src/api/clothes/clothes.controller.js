@@ -32,10 +32,6 @@ async function remove(req, res) {
 async function create(req, res) {
   const clothesItem = req.body;
 
-  if(clothesItem.stock){
-    clothesItem.stock=0;
-  }
-
   if (!clothesItem.type || !clothesItem.color || !clothesItem.name || !clothesItem.price) {
     let message = 'The following properties are mandatory: ';
     const emptyProps = [];
@@ -45,11 +41,15 @@ async function create(req, res) {
     !clothesItem.price && emptyProps.push('Price');
     message += emptyProps.join(', ');
 
-
     res.status(400);
     res.json({ error: message, });
     return;
   }
+
+  if(clothesItem.stock){
+    clothesItem.stock=0;
+  }
+
   const lastItem = await clothesService.create({ clothesItem, });
   res.json(lastItem);
 }

@@ -12,7 +12,6 @@ router.delete('/id/:id', clothesController.remove);
 router.post(
   '/',
   (req, res, next) => roleMiddleware(req, res, next, ['admin',]),
-
   clothesController.create
 );
 
