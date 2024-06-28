@@ -1,7 +1,7 @@
 import * as authService from './auth.service.js';
 
 async function login(req, res) {
-  const { email, password, } = req.body; // Usar email e password
+  const { email, password, } = req.body; // Usar email y password
   if (!email || !password) {
     res.status(400).json({ error: 'ERROR: The email and password params are required' });
     return;

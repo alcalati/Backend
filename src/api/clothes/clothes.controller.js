@@ -19,7 +19,7 @@ async function updateById(req, res) {
     res.json(updatedProduct);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Erro ao atualizar o produto' });
+    res.status(500).json({ error: 'Error to update product', });
   }
 }
 
