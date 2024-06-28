@@ -30,10 +30,16 @@ function remove({ id, }) {
   return removedClothes;
 }
 
+function create({ clothesItem, }) {
+  const createdClothes = clothesModel.create(clothesItem);
+  return createdClothes;
+}
+
 export {
   getAll,
   getByFilter,
   getByPriceRange,
   remove,
-  getById
+  getById,
+  create
 };
