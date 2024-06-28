@@ -1,5 +1,5 @@
 import * as clothesRepository from './clothes.repository.js';
-import * as cartRepository from '../cart/cart.repository.js';
+import * as movementsRepository from '../movements/movements.repository.js';
 
 function getByFilter({ query, }) {
   const filteredClothes = clothesRepository.getByFilter({ query, });
@@ -14,24 +14,26 @@ async function getAll() {
 async function removeItem({ id, }) {
 
   const refundedItem = await clothesRepository.getById({id,});
-  await cartRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
+  await movementsRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
   const removedItem = clothesRepository.remove({ id, });
   return removedItem;
 }
 
-async function sellItem({ id, }) {
-  console.log('{ Clothes Service } Cogiendo item para vender');
-  const sellItem = await clothesRepository.getById({id,});
-  console.log('se procede a quitar de inventario '+ sellItem);
-  await cartRepository.sell({ id, price: sellItem.price, stock: sellItem.stock, });
-  const soldItem = clothesRepository.update({ id, sellItem,});
-  console.log('Se ha quitado el stock ' + soldItem);
-  return soldItem;
+async function buyItem({ id, quantity, }) {
+  const buyItem = await clothesRepository.getById({id,});
+  const soldItem = await updateStock({buyItem, quantity, });
+  const updatedItem = await clothesRepository.update({ id, soldItem, });
+  return updatedItem;
+}
+
+async function updateStock ({buyItem, quantity, }){
+  buyItem.stock = buyItem.stock - quantity;
+  return buyItem;
 }
 
 export {
   getAll,
   getByFilter,
   removeItem,
-  sellItem
+  buyItem
 };

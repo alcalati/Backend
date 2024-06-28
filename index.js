@@ -1,6 +1,6 @@
 import express from 'express';
 import './database.js';
-import authMiddleware from './src/middlewares/auth.middleware.js';
+import authMiddleware from './src/api/middleware/auth.middleware.js';
 import apiRouter from './src/api/router.js';
 
 const server = express();

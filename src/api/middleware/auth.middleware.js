@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { getByEmail } from '../api/users/users.service.js';
+import { getByEmail } from '../users/users.service.js';
 
 function unauthorized({ res, }) {
   res.status(401);
@@ -8,6 +8,7 @@ function unauthorized({ res, }) {
 
 function authMiddleware(req, res, next) {
   const publicRoutes = [
+    '/auth/register',
   ];
 
   if (publicRoutes.some((publicRoute) => req.url.includes(publicRoute))) {

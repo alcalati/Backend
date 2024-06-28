@@ -20,9 +20,17 @@ function remove({ id, }) {
   return removedClothes;
 }
 
+async function update({ id, soldItem, }) {
+  const query = { _id: id, };
+  const options = { new: true, };
+  const updatedClothes = await clothesModel.findOneAndUpdate(query, soldItem, options);
+  return updatedClothes;
+}
+
 export {
   getAll,
   getByFilter,
   remove,
-  getById
+  getById,
+  update
 };
