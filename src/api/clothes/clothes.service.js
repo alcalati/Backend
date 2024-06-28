@@ -11,8 +11,8 @@ async function getAll() {
   return allClothes;
 }
 
-async function updateById(id, updateData) {
-  const updatedProduct = await clothesRepository.updateById(id, updateData);
+async function updateById({ id, updateData, }) {
+  const updatedProduct = await clothesRepository.updateById({ id, updateData, });
   return updatedProduct;
 }
 
@@ -28,10 +28,16 @@ async function remove({ id, }) {
   return removedItem;
 }
 
+function create({ clothesItem, }) {
+  const newClothesItem = clothesRepository.create({ clothesItem, });
+  return newClothesItem;
+}
+
 export {
   getAll,
   getByFilter,
   getByPriceRange,
   remove,
   updateById,
+  create
 };
