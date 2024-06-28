@@ -5,14 +5,37 @@ function getByFilter({ query, }) {
   return filteredClothes;
 }
 
+async function getById({ id, }) {
+  const clothesByIndex = await clothesModel.findById(id).lean();
+  return clothesByIndex;
+}
+
 async function getAll() {
   const allClothes = await clothesModel.find({}).lean();
   return allClothes;
 }
 
+function getByPriceRange({ query, }) {
+  const price = { $gte: 0, };
+
+  query.min && (price.$gte = parseFloat(query.min));
+  query.max && (price.$lte = parseFloat(query.max));
+
+  const filteredByPriceRangeClothes = clothesModel.find({ price, }).lean();
+  return filteredByPriceRangeClothes;
+}
+
+function remove({ id, }) {
+  const removedClothes = clothesModel.findByIdAndDelete(id);
+  return removedClothes;
+}
+
 export {
   getAll,
-  getByFilter
+  getByFilter,
+  getByPriceRange,
+  remove,
+  getById
 };
   export async function updateById(id, updateData) {
     try {

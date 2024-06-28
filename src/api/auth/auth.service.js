@@ -1,5 +1,5 @@
 import * as usersRepository from '../users/users.repository.js';
-import { hashSync } from 'bcrypt';
+import { compareSync, hashSync } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 function getToken({ email, }) {
@@ -13,6 +13,20 @@ function getToken({ email, }) {
   return token;
 }
 
+async function login({ email, password, }) {
+  const dbUser = await usersRepository.getByEmail({ email, });
+  if (!dbUser) {
+    throw new Error('Wrong credentials');
+  }
+
+  const isSamePassword = compareSync(password, dbUser.password);
+  if (!isSamePassword) {
+    throw new Error('Wrong credentials');
+  }
+
+  return getToken({ email, });
+}
+
 async function register({ newUser, }) {
   const { email, password, } = newUser;
   const dbUser = await usersRepository.getByEmail({ email, });
@@ -22,10 +36,9 @@ async function register({ newUser, }) {
 
   const hashedPassword = hashSync(password, 10);
   newUser.password = hashedPassword;
-
   usersRepository.create({ user: newUser, });
   return getToken({ email, });
 }
 
 
-export { register };
+export { login, register };

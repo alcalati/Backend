@@ -1,4 +1,5 @@
 import * as clothesRepository from './clothes.repository.js';
+import * as salesRepository from '../sales/sales.repository.js';
 
 function getByFilter({ query, }) {
   const filteredClothes = clothesRepository.getByFilter({ query, });
@@ -10,14 +11,27 @@ async function getAll() {
   return allClothes;
 }
 
-
 async function updateById(id, updateData) {
   const updatedProduct = await clothesRepository.updateById(id, updateData);
   return updatedProduct;
 }
 
+function getByPriceRange({ query, }) {
+  const filteredClothesByPriceRange = clothesRepository.getByPriceRange({ query, });
+  return filteredClothesByPriceRange;
+}
+
+async function remove({ id, }) {
+  const refundedItem = await clothesRepository.getById({id,});
+  await salesRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
+  const removedItem = clothesRepository.remove({ id, });
+  return removedItem;
+}
+
 export {
-  updateById,
+  getAll,
   getByFilter,
-  getAll
+  getByPriceRange,
+  remove,
+  updateById,
 };
