@@ -7,7 +7,6 @@ const router = Router();
 router.patch(
   '/addCash',
   (req, res, next) => roleMiddleware(req, res, next, ['admin','client',]),
-
   usersController.addCash
 );
 

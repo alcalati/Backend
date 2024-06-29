@@ -7,7 +7,6 @@ const router = Router();
 router.get(
   '/getAll',
   (req, res, next) => roleMiddleware(req, res, next, ['admin',]),
-
   movementsController.getAll
 );
 
