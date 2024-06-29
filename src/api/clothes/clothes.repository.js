@@ -30,10 +30,31 @@ function remove({ id, }) {
   return removedClothes;
 }
 
+export async function updateById({ id, updateData, }) {
+  try {
+    const updatedProduct = await clothesModel.findByIdAndUpdate(id, updateData, { new: true, });
+    if (!updatedProduct) {
+      throw new Error('Product not found');
+    }
+    return updatedProduct;
+  } catch (error) {
+    throw new Error(`Error updating product: ${error.message}`);
+  }
+}
+
+async function getStockById({ id, }) {
+  const product = await clothesModel.findById(id).select('stock').lean();
+  if (!product) {
+    throw new Error('Product not found');
+  }
+  return product.stock;
+}
+
 export {
   getAll,
   getByFilter,
   getByPriceRange,
   remove,
-  getById
+  getById,
+  getStockById
 };

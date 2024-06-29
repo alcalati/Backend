@@ -23,9 +23,22 @@ async function remove({ id, }) {
   return removedItem;
 }
 
+async function updateById({ id, updateData, }) {
+  const updatedProduct = await clothesRepository.updateById({ id, updateData, });
+  return updatedProduct;
+}
+
+async function calculateStock({ id, quantity,}) {
+  const stock = await clothesRepository.getStockById({ id,});
+  const newStock=stock+quantity;
+  return newStock;
+}
+
 export {
   getAll,
   getByFilter,
   getByPriceRange,
-  remove
+  remove,
+  updateById,
+  calculateStock
 };
