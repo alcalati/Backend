@@ -40,5 +40,4 @@ async function register({ newUser, }) {
   return getToken({ email, });
 }
 
-
 export { login, register };

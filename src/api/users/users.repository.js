@@ -20,6 +20,6 @@ export async function addCash({ userId, amount, }) {
   return updatedUser;
 }
 
-export async function subtractCash(userId, amount) {
+export async function subtractCash({userId, amount,}) {
   return userModel.findByIdAndUpdate(userId, { $inc: { cash: -amount,},}, { new: true,});
 }

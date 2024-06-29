@@ -5,9 +5,6 @@ export async function getByEmail({ email, }) {
 }
 
 export async function subtractCash({userId, amount,}) {
-  const user = await usersRepo.subtractCash(userId, amount);
-  if (!user) {
-    throw new Error('User not found or insufficient funds');
-  }
+  const user = await usersRepo.subtractCash({userId, amount,});
   return user;
 }

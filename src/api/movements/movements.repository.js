@@ -1,10 +1,10 @@
 import movementsModel from './movements.model.js';
 
-async function addBuyStockMovement({clothesId, productPrice, quantity,}) {
-  const addClothes = await movementsModel.create({clothesId, productPrice, quantity, type: 'addStock', });
+async function addStockMovement({ clothesId, price, quantity, ticketId, }) {
+  const addClothes = await movementsModel.create({clothesId, price , quantity , type: 'addStock', ticketId, });
   return addClothes;
 }
 
 export {
-  addBuyStockMovement
+  addStockMovement
 };
