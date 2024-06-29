@@ -20,14 +20,5 @@ export async function refund(req, res) {
   const ticket = await ticketService.buyTicket({movementId, userId,});
 
   const updatedUser = await userService.takeMoney({ user, price: productPrice, quantity, });
-
-  console.log('-------------------MOVEMENT-------------------------------');
-  console.log(addItem);
-  console.log('-------------------TICKET-------------------------------');
-  console.log(ticket);
-  console.log('-------------------CLOTHES-------------------------------');
-  console.log(item);
-  console.log('-------------------USER-------------------------------');
-  console.log(updatedUser);
   res.json(addItem);
 }

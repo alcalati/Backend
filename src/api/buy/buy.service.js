@@ -29,10 +29,9 @@ export async function buy({ ticketLines, user, }) {
     totalPrice = totalPrice + movement.price * movement.quantity;
   }
 
-  user.cash = user.cash - totalPrice;
+  user.cash -= totalPrice;
   const updateduser = await usersRepository.update({ id: user._id, user, });
   console.log(updateduser);
   ticket.totalPrice = totalPrice;
   return ticket;
-
 }

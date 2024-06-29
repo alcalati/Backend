@@ -22,7 +22,6 @@ async function update({ id, newItem, }) {
   return updatedmovements;
 }
 
-
 export {
   getById,
   refund,

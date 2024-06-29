@@ -26,7 +26,6 @@ async function buyItem({ id, quantity, }) {
   return updatedItem;
 }
 
-
 export {
   getAll,
   getByFilter,
