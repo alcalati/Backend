@@ -11,5 +11,4 @@ router.patch(
   usersController.addCash
 );
 
-
 export default router;
