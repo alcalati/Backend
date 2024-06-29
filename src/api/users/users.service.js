@@ -4,8 +4,7 @@ export async function getByEmail({ email, }) {
   return usersRepo.getByEmail({ email, });
 }
 
-export async function takeMoney({ user, price, quantity ,}) {
-  const totalPrice = price * quantity;
+export async function takeMoney({ user, totalPrice,}) {
   user.cash = user.cash - totalPrice;
   const updatedUser = await usersRepo.update({id: user._id ,user,});
   return updatedUser;

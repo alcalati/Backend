@@ -5,8 +5,8 @@ export function getById({ id,}) {
 }
 
 
-export async function add({ id, productPrice, quantity, }) {
-  const newItem = await movementsRepository.addToMovements({clothesId: id, price: productPrice, quantity, });
+export async function add({ id, productPrice, quantity, ticketId, }) {
+  const newItem = await movementsRepository.addToMovements({clothesId: id, price: productPrice, quantity, ticketId });
   return newItem;
 }
 

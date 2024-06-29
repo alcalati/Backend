@@ -10,8 +10,8 @@ function refund({ id, price, stock, }) {
   return refundClothes;
 }
 
-async function addToMovements({ clothesId, price, quantity, }) {
-  const addClothes = await movementsModel.create({idClothes : clothesId, price : price , quantity : quantity , type: 'buy', });
+async function addToMovements({ clothesId, price, quantity, ticketId, }) {
+  const addClothes = await movementsModel.create({clothesId, price , quantity , type: 'buy', ticketId, });
   return addClothes;
 }
 

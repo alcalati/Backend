@@ -21,15 +21,11 @@ async function removeItem({ id, }) {
 
 async function buyItem({ id, quantity, }) {
   const buyItem = await clothesRepository.getById({id,});
-  const soldItem = await updateStock({buyItem, quantity, });
-  const updatedItem = await clothesRepository.update({ id, soldItem, });
+  buyItem.stock = buyItem.stock - quantity;
+  const updatedItem = await clothesRepository.update({ id, buyItem, });
   return updatedItem;
 }
 
-async function updateStock ({buyItem, quantity, }){
-  buyItem.stock = buyItem.stock - quantity;
-  return buyItem;
-}
 
 export {
   getAll,
