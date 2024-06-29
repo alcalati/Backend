@@ -1,34 +1,35 @@
 import * as usersRepo from './users.repository.js';
-import userModel from './users.model.js';
+import bcrypt from 'bcrypt';
 
-export async function updateProfileByEmail(email, updateData) {
-  try {
-    const updatedUser = await userModel.findOneAndUpdate(
-      { email },
-      updateData,
-      { new: true }
-    );
+export async function updateProfile({ userId, updateData, }) {
+  const existingUser = await usersRepo.getById(userId);
 
-    if (!updatedUser) {
-      throw new Error('User not found');
-    }
-
-    return updatedUser;
-  } catch (error) {
-    console.error(`Error updating profile: ${error.message}`);
-    throw new Error('Error updating profile');
+  if (!existingUser) {
+    throw new Error('User not found');
   }
+
+  if (existingUser.role === 'client' && (updateData.role || updateData.cash !== undefined)) {
+    throw new Error('Unauthorized to change role or cash');
+  }
+
+  if (updateData.password) {
+    const hashedPassword = await bcrypt.hash(updateData.password, 10);
+    updateData.password = hashedPassword;
+  }
+  const updatedUser = await usersRepo.updateProfile({ userId, updateData, });
+
+  return updatedUser;
 }
 
 export async function deleteProfile(userId) {
   try {
-    const result = await usersRepo.deleteProfile({ userId });
+    const result = await usersRepo.deleteProfile({ userId, });
 
     if (!result) {
       throw new Error('User not found');
     }
 
-    return { message: 'Profile deleted successfully' };
+    return { message: 'Profile deleted successfully', };
   } catch (error) {
     console.error(`Error deleting profile: ${error.message}`);
     throw new Error('Error deleting profile');
