@@ -5,7 +5,7 @@ const userSchema = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ['admin', 'client'], // Definimos los roles permitidos
+    enum: ['admin', 'client', 'provedor'],
   },
   email: {
     type: String,
@@ -29,7 +29,7 @@ const userSchema = new Schema({
 
 const userModel = model('User', userSchema);
 
-// Método para hashear la contraseña antes de guardarla
+
 userSchema.pre('save', async function(next) {
   try {
     if (this.isModified('password')) {

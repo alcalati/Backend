@@ -21,7 +21,7 @@ export async function deleteProfile({ req, res, }) {
     await usersService.deleteProfile(userId);
     res.json({ message: 'Profile deleted successfully', });
   } catch (err) {
-    res.status(500).json({ error: 'Error deleing profile: '+err.message, });
+    res.status(500).json({ error: 'Error deleting profile: '+err.message, });
   }
 }
 
