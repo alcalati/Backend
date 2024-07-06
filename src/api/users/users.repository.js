@@ -19,3 +19,18 @@ export async function addCash({ userId, amount, }) {
   );
   return updatedUser;
 }
+
+export async function updateById({ id, updateData }) {
+  try {
+    const { stock, price, ...allowedUpdates } = updateData; 
+    const updatedProduct = await clothesModel.findByIdAndUpdate(id, allowedUpdates, { new: true });
+    if (!updatedProduct) {
+      throw new Error('Product not found');
+    }
+    return updatedProduct;
+  } catch (error) {
+    console.error(`Error updating product: ${error.message}`);
+    throw new Error('Error updating product');
+  }
+}
+
