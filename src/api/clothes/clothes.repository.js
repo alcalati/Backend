@@ -15,6 +15,16 @@ async function getAll() {
   return allClothes;
 }
 
+function getByPriceRange({ query, }) {
+  const price = { $gte: 0, };
+
+  query.min && (price.$gte = parseFloat(query.min));
+  query.max && (price.$lte = parseFloat(query.max));
+
+  const filteredByPriceRangeClothes = clothesModel.find({ price, }).lean();
+  return filteredByPriceRangeClothes;
+}
+
 function remove({ id, }) {
   const removedClothes = clothesModel.findByIdAndDelete(id);
   return removedClothes;
@@ -27,10 +37,29 @@ async function update({ id, soldItem, }) {
   return updatedClothes;
 }
 
+function create({ clothesItem, }) {
+  const createdClothes = clothesModel.create(clothesItem);
+  return createdClothes;
+}
+
+export async function updateById({id, updateData}) {
+  try {
+    const updatedProduct = await clothesModel.findByIdAndUpdate(id, updateData, { new: true, });
+    if (!updatedProduct) {
+      throw new Error('Product not found');
+    }
+    return updatedProduct;
+  } catch (error) {
+    throw new Error(`Error updating product: ${error.message}`);
+  }
+}
+
 export {
   getAll,
   getByFilter,
+  getByPriceRange,
   remove,
   getById,
-  update
+  update,
+  create
 };

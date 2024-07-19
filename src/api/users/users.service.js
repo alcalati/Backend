@@ -9,3 +9,9 @@ export async function takeMoney({ user, totalPrice,}) {
   const updatedUser = await usersRepo.update({id: user._id ,user,});
   return updatedUser;
 }
+export async function addCash({ user, amount, }) {
+  user.cash += amount;
+
+  const updatedUser = await usersRepo.addCash({ userId: user._id, amount: user.cash,});
+  return updatedUser;
+}

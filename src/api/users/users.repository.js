@@ -22,3 +22,12 @@ export async function update({ id, user, }) {
   return updatedUser;
 }
 
+export async function addCash({ userId, amount, }) {
+  const options = { new: true,};
+  const updatedUser = await userModel.findByIdAndUpdate(
+    userId,
+    { $set: { cash: amount, },},
+    options
+  );
+  return updatedUser;
+}

@@ -11,8 +11,17 @@ async function getAll() {
   return allClothes;
 }
 
-async function removeItem({ id, }) {
+async function updateById({ id, updateData, }) {
+  const updatedProduct = await clothesRepository.updateById({ id, updateData, });
+  return updatedProduct;
+}
 
+function getByPriceRange({ query, }) {
+  const filteredClothesByPriceRange = clothesRepository.getByPriceRange({ query, });
+  return filteredClothesByPriceRange;
+}
+
+async function remove({ id, }) {
   const refundedItem = await clothesRepository.getById({id,});
   await movementsRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
   const removedItem = clothesRepository.remove({ id, });
@@ -25,10 +34,17 @@ async function buyItem({ id, quantity, }) {
   const updatedItem = await clothesRepository.update({ id, buyItem, });
   return updatedItem;
 }
+function create({ clothesItem, }) {
+  const newClothesItem = clothesRepository.create({ clothesItem, });
+  return newClothesItem;
+}
 
 export {
   getAll,
   getByFilter,
-  removeItem,
-  buyItem
+  buyItem,
+  getByPriceRange,
+  remove,
+  updateById,
+  create
 };
