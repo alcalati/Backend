@@ -16,6 +16,7 @@ const userSchema = new Schema({
   cash: {
     type: Number,
     required: true,
+    default: 0,
   },
   deleted: {
     type: Boolean,

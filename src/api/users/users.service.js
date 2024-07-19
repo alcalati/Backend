@@ -4,6 +4,11 @@ export async function getByEmail({ email, }) {
   return usersRepo.getByEmail({ email, });
 }
 
+export async function takeMoney({ user, totalPrice,}) {
+  user.cash = user.cash - totalPrice;
+  const updatedUser = await usersRepo.update({id: user._id ,user,});
+  return updatedUser;
+}
 export async function addCash({ user, amount, }) {
   user.cash += amount;
 

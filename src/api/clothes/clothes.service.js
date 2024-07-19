@@ -1,5 +1,5 @@
 import * as clothesRepository from './clothes.repository.js';
-import * as salesRepository from '../sales/sales.repository.js';
+import * as movementsRepository from '../movements/movements.repository.js';
 
 function getByFilter({ query, }) {
   const filteredClothes = clothesRepository.getByFilter({ query, });
@@ -23,11 +23,17 @@ function getByPriceRange({ query, }) {
 
 async function remove({ id, }) {
   const refundedItem = await clothesRepository.getById({id,});
-  await salesRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
+  await movementsRepository.refund({ id, price: refundedItem.price, stock: refundedItem.stock, });
   const removedItem = clothesRepository.remove({ id, });
   return removedItem;
 }
 
+async function buyItem({ id, quantity, }) {
+  const buyItem = await clothesRepository.getById({id,});
+  buyItem.stock = buyItem.stock - quantity;
+  const updatedItem = await clothesRepository.update({ id, buyItem, });
+  return updatedItem;
+}
 function create({ clothesItem, }) {
   const newClothesItem = clothesRepository.create({ clothesItem, });
   return newClothesItem;
@@ -36,6 +42,7 @@ function create({ clothesItem, }) {
 export {
   getAll,
   getByFilter,
+  buyItem,
   getByPriceRange,
   remove,
   updateById,

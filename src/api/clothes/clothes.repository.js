@@ -30,6 +30,13 @@ function remove({ id, }) {
   return removedClothes;
 }
 
+async function update({ id, soldItem, }) {
+  const query = { _id: id, };
+  const options = { new: true, };
+  const updatedClothes = await clothesModel.findOneAndUpdate(query, soldItem, options);
+  return updatedClothes;
+}
+
 function create({ clothesItem, }) {
   const createdClothes = clothesModel.create(clothesItem);
   return createdClothes;
@@ -53,5 +60,6 @@ export {
   getByPriceRange,
   remove,
   getById,
+  update,
   create
 };
