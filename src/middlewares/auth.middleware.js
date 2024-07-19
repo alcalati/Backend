@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { getByEmail } from '../users/users.service.js';
+import { getByEmail } from '../api/users/users.service.js';
 
 function unauthorized({ res, }) {
   res.status(401);
