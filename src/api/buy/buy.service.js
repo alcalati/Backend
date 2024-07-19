@@ -15,7 +15,6 @@ export async function checkMoney({ ticketLines, }) {
 
 export async function buy({ ticketLines, user, }) {
   const userId = user._id;
-  let totalPrice = 0;
   const ticket = await ticketRepository.buy({ userId, time: new Date(), });
   const ticketId = ticket._id;
   for (let i = 0; i < ticketLines.length; i++) {
@@ -26,9 +25,9 @@ export async function buy({ ticketLines, user, }) {
     const buyItem = await clothesRepository.getById({ id, });
     buyItem.stock = buyItem.stock - quantity;
     const updatedclothes = await clothesRepository.update({ id, buyItem, });
-    totalPrice = totalPrice + movement.price * movement.quantity;
   }
 
+  const totalPrice = checkMoney({ ticketLines, })
   user.cash -= totalPrice;
   const updateduser = await usersRepository.update({ id: user._id, user, });
   console.log(updateduser);
