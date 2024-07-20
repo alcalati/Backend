@@ -1,4 +1,5 @@
 import * as clothesService from './clothes.service.js';
+
 async function getAll(req, res) {
   const allClothes = await clothesService.getAll();
   res.json(allClothes);
@@ -8,6 +9,12 @@ async function getByFilter(req, res) {
   const { query, } = req;
   const filteredClothes = await clothesService.getByFilter({ query, });
   res.json(filteredClothes);
+}
+
+async function getById (req, res) {
+  const { id, } = req.params;
+  const clothesById = await clothesService.getById({ id, });
+  res.json(clothesById);
 }
 
 async function updateById(req, res) {
@@ -70,6 +77,7 @@ async function create(req, res) {
 
 export {
   getAll,
+  getById,
   getByFilter,
   getByPriceRange,
   remove,
