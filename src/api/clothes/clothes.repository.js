@@ -5,7 +5,7 @@ function getByFilter({ query, }) {
   return filteredClothes;
 }
 
-async function getById({ id, }) {
+async function getById({ id,}) {
   const clothesByIndex = await clothesModel.findById(id).lean();
   return clothesByIndex;
 }
