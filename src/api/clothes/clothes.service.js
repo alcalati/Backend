@@ -11,8 +11,8 @@ async function getAll() {
   return allClothes;
 }
 
-async function getById() {
-  const clothesById = await clothesRepository.getById({ id, });
+async function getById({ id,}) {
+  const clothesById = await clothesRepository.getById({ id,});
   return clothesById;
 }
 

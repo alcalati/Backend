@@ -11,11 +11,20 @@ async function getByFilter(req, res) {
   res.json(filteredClothes);
 }
 
-async function getById (req, res) {
-  const { id, } = req.params;
-  const clothesById = await clothesService.getById({ id, });
-  res.json(clothesById);
+async function getById(req, res) {
+  const { id,} = req.params;
+  try {
+    const clothesById = await clothesService.getById({ id,});
+    if (!clothesById) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(clothesById);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
+
 
 async function updateById(req, res) {
   const { id, } = req.params;
