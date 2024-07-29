@@ -9,6 +9,7 @@ router.get('/byId/:id', clothesController.getById);
 router.put('/:id', clothesController.updateById);
 router.get('/filter', clothesController.getByFilter);
 router.get('/lastClothes', clothesController.getLast);
+router.get('/cheapestClothes', clothesController.getCheapest);
 router.get('/byPriceRange', clothesController.getByPriceRange);
 router.delete('/id/:id', clothesController.remove);
 

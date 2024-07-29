@@ -16,6 +16,10 @@ async function getLast(req, res) {
   res.json(lastClothes);
 }
 
+async function getCheapest(req, res) {
+  const cheapestClothes = await clothesService.getCheapest();
+  res.json(cheapestClothes);
+}
 
 async function getById(req, res) {
   const { id,} = req.params;
@@ -94,6 +98,7 @@ export {
   getById,
   getByFilter,
   getLast,
+  getCheapest,
   getByPriceRange,
   remove,
   updateById,

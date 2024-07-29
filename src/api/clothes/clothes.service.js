@@ -21,6 +21,11 @@ async function getLast() {
   return lastClothes;
 }
 
+async function getCheapest() {
+  const cheapestClothes = await clothesRepository.getCheapest();
+  return cheapestClothes;
+}
+
 async function updateById({ id, updateData, }) {
   const updatedProduct = await clothesRepository.updateById({ id, updateData, });
   return updatedProduct;
@@ -54,6 +59,7 @@ export {
   getById,
   getByFilter,
   getLast,
+  getCheapest,
   buyItem,
   getByPriceRange,
   remove,
