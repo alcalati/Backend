@@ -10,6 +10,10 @@ function authMiddleware(req, res, next) {
   const publicRoutes = [
     '/auth/register',
     '/auth/login',
+    '/clothes/all',
+    '/byId/:id',
+    '/byPriceRange',
+    '/filter',
   ];
 
   if (publicRoutes.some((publicRoute) => req.url.includes(publicRoute))) {
