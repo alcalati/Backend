@@ -16,8 +16,13 @@ async function getAll() {
 }
 
 async function getLast() {
-  const lastThreeClothes = await clothesModel.find({}).sort({ _id: -1,}).limit(5).lean();
-  return lastThreeClothes;
+  const lastClothes = await clothesModel.find({}).sort({ _id: -1,}).limit(5).lean();
+  return lastClothes;
+}
+
+async function getCheapest() {
+  const cheapestClothes = await clothesModel.find({}).sort({ price: 1 }).limit(5).lean();
+  return cheapestClothes;
 }
 
 function getByPriceRange({ query, }) {
@@ -63,6 +68,7 @@ export {
   getAll,
   getByFilter,
   getLast,
+  getCheapest,
   getByPriceRange,
   remove,
   getById,
