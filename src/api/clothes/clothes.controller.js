@@ -1,4 +1,5 @@
 import * as clothesService from './clothes.service.js';
+
 async function getAll(req, res) {
   const allClothes = await clothesService.getAll();
   res.json(allClothes);
@@ -8,6 +9,26 @@ async function getByFilter(req, res) {
   const { query, } = req;
   const filteredClothes = await clothesService.getByFilter({ query, });
   res.json(filteredClothes);
+}
+
+async function getLast(req, res) {
+  const lastClothes = await clothesService.getLast();
+  res.json(lastClothes);
+}
+
+
+async function getById(req, res) {
+  const { id,} = req.params;
+  try {
+    const clothesById = await clothesService.getById({ id,});
+    if (!clothesById) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(clothesById);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 async function updateById(req, res) {
@@ -70,7 +91,9 @@ async function create(req, res) {
 
 export {
   getAll,
+  getById,
   getByFilter,
+  getLast,
   getByPriceRange,
   remove,
   updateById,

@@ -7,9 +7,15 @@ function unauthorized({ res, }) {
 }
 
 function authMiddleware(req, res, next) {
+
   const publicRoutes = [
     '/auth/register',
     '/auth/login',
+    '/clothes/all',
+    '/clothes/byId',
+    '/clothes/byPriceRange',
+    '/clothes/filter',
+    '/clothes/lastClothes',
   ];
 
   if (publicRoutes.some((publicRoute) => req.url.includes(publicRoute))) {

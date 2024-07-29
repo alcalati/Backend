@@ -5,7 +5,7 @@ function getByFilter({ query, }) {
   return filteredClothes;
 }
 
-async function getById({ id, }) {
+async function getById({ id,}) {
   const clothesByIndex = await clothesModel.findById(id).lean();
   return clothesByIndex;
 }
@@ -13,6 +13,11 @@ async function getById({ id, }) {
 async function getAll() {
   const allClothes = await clothesModel.find({}).lean();
   return allClothes;
+}
+
+async function getLast() {
+  const lastThreeClothes = await clothesModel.find({}).sort({ _id: -1,}).limit(5).lean();
+  return lastThreeClothes;
 }
 
 function getByPriceRange({ query, }) {
@@ -57,6 +62,7 @@ export async function updateById({id, updateData}) {
 export {
   getAll,
   getByFilter,
+  getLast,
   getByPriceRange,
   remove,
   getById,
