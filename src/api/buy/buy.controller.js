@@ -9,6 +9,6 @@ export async function buy(req, res) {
     res.json('Insufficient Funds');
     return;
   }
-  const addItem = await buyService.buy({ticketLines, user,});
-  res.json(addItem);
+  const {ticket, movements} = await buyService.buy({ticketLines, user,});
+  res.json({ ticket, movements });
 }
