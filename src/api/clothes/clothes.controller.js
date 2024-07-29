@@ -25,7 +25,6 @@ async function getById(req, res) {
   }
 }
 
-
 async function updateById(req, res) {
   const { id, } = req.params;
   const updateData = req.body;
