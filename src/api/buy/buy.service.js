@@ -25,7 +25,6 @@ export async function buy({ ticketLines, user, }) {
     const productPrice = product.price;
     const movement = await movementsRepository.addToMovements({ clothesId: id, price: productPrice, quantity, ticketId });
     movements.push(movement);
-    console.log(movements);
     const buyItem = await clothesRepository.getById({ id, });
     buyItem.stock = buyItem.stock - quantity;
     const updatedclothes = await clothesRepository.update({ id, buyItem, });
