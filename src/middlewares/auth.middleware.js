@@ -15,6 +15,7 @@ function authMiddleware(req, res, next) {
     '/clothes/byId',
     '/clothes/byPriceRange',
     '/clothes/filter',
+    '/clothes/lastClothes',
   ];
 
   if (publicRoutes.some((publicRoute) => req.url.includes(publicRoute))) {

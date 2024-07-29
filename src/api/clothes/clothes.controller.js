@@ -11,6 +11,12 @@ async function getByFilter(req, res) {
   res.json(filteredClothes);
 }
 
+async function getLast(req, res) {
+  const lastClothes = await clothesService.getLast();
+  res.json(lastClothes);
+}
+
+
 async function getById(req, res) {
   const { id,} = req.params;
   try {
@@ -87,6 +93,7 @@ export {
   getAll,
   getById,
   getByFilter,
+  getLast,
   getByPriceRange,
   remove,
   updateById,

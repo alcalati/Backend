@@ -15,6 +15,11 @@ async function getAll() {
   return allClothes;
 }
 
+async function getLast() {
+  const lastThreeClothes = await clothesModel.find({}).sort({ _id: -1,}).limit(5).lean();
+  return lastThreeClothes;
+}
+
 function getByPriceRange({ query, }) {
   const price = { $gte: 0, };
 
@@ -57,6 +62,7 @@ export async function updateById({id, updateData}) {
 export {
   getAll,
   getByFilter,
+  getLast,
   getByPriceRange,
   remove,
   getById,
