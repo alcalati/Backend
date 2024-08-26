@@ -9,7 +9,7 @@ async function login(req, res) {
 
   try {
     const token = await authService.login({ email, password });
-    res.json(token);
+    res.json({token});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -34,7 +34,7 @@ async function register(req, res) {
 
   try {
     const token = await authService.register({ newUser, });
-    res.json(token);
+    res.json({token});
   } catch(err) {
     res.status(400);
     res.json({ error: err.message, });
